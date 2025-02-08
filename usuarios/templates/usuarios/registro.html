@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Registro de Usuario</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{ form.email.id_for_label }}">Correo electrónico:</label>
+                                    {{ form.email }}
+                                    {% if form.email.errors %}
+                                        <div class="alert alert-danger">{{ form.email.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label for="{{ form.first_name.id_for_label }}">Nombre:</label>
+                                    {{ form.first_name }}
+                                    {% if form.first_name.errors %}
+                                        <div class="alert alert-danger">{{ form.first_name.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label for="{{ form.apellido_paterno.id_for_label }}">Apellido Paterno:</label>
+                                    {{ form.apellido_paterno }}
+                                    {% if form.apellido_paterno.errors %}
+                                        <div class="alert alert-danger">{{ form.apellido_paterno.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label for="{{ form.apellido_materno.id_for_label }}">Apellido Materno:</label>
+                                    {{ form.apellido_materno }}
+                                    {% if form.apellido_materno.errors %}
+                                        <div class="alert alert-danger">{{ form.apellido_materno.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label for="{{ form.password1.id_for_label }}">Contraseña:</label>
+                                    {{ form.password1 }}
+                                    {% if form.password1.errors %}
+                                        <div class="alert alert-danger">{{ form.password1.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label for="{{ form.password2.id_for_label }}">Confirmar contraseña:</label>
+                                    {{ form.password2 }}
+                                    {% if form.password2.errors %}
+                                        <div class="alert alert-danger">{{ form.password2.errors }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{ form.rut.id_for_label }}">RUT:</label>
+                                    {{ form.rut }}
+                                    {% if form.rut.errors %}
+                                        <div class="alert alert-danger">{{ form.rut.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label for="{{ form.numero_documento.id_for_label }}">Número de Documento:</label>
+                                    {{ form.numero_documento }}
+                                    {% if form.numero_documento.errors %}
+                                        <div class="alert alert-danger">{{ form.numero_documento.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label for="{{ form.direccion.id_for_label }}">Dirección:</label>
+                                    {{ form.direccion }}
+                                    {% if form.direccion.errors %}
+                                        <div class="alert alert-danger">{{ form.direccion.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label for="{{ form.telefono.id_for_label }}">Teléfono:</label>
+                                    {{ form.telefono }}
+                                    {% if form.telefono.errors %}
+                                        <div class="alert alert-danger">{{ form.telefono.errors }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="{{ form.foto_perfil.id_for_label }}">Foto de Perfil (Selfie):</label>
+                                    {{ form.foto_perfil }}
+                                    {% if form.foto_perfil.errors %}
+                                        <div class="alert alert-danger">{{ form.foto_perfil.errors }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="{{ form.foto_carnet_frente.id_for_label }}">Foto Carnet (Frente):</label>
+                                    {{ form.foto_carnet_frente }}
+                                    {% if form.foto_carnet_frente.errors %}
+                                        <div class="alert alert-danger">{{ form.foto_carnet_frente.errors }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="{{ form.foto_carnet_dorso.id_for_label }}">Foto Carnet (Dorso):</label>
+                                    {{ form.foto_carnet_dorso }}
+                                    {% if form.foto_carnet_dorso.errors %}
+                                        <div class="alert alert-danger">{{ form.foto_carnet_dorso.errors }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger mt-3">
+                                {{ form.non_field_errors }}
+                            </div>
+                        {% endif %}
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-primary">Registrarse</button>
+                        </div>
+                    </form>
+                    <div class="text-center mt-3">
+                        <p>¿Ya tienes una cuenta? <a href="{% url 'login' %}">Inicia sesión aquí</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

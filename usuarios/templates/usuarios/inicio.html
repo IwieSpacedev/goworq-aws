@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Sistema de Verificación</h1>
+
+    {% if messages %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+
+    <div class="card mb-4">
+        <div class="card-header bg-success text-white">
+            <h5 class="mb-0">
+                <i class="fas fa-clock"></i> Verificación en Proceso
+            </h5>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-info">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <strong>Estado:</strong> 
+                        <span class="badge {% if user.estado_verificacion == 'verificado' %}bg-success
+                                         {% elif user.estado_verificacion == 'pendiente' %}bg-warning
+                                         {% elif user.estado_verificacion == 'en_proceso' %}bg-primary
+                                         {% else %}bg-danger{% endif %}">
+                            {{ user.get_estado_verificacion_display }}
+                        </span>
+                    </div>
+                    <div>
+                        <strong>Fecha de Registro:</strong> {{ user.fecha_registro|date:"d/m/Y H:i" }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">
+                    <h5 class="mb-3">Información Personal</h5>
+                    <table class="table">
+                        <tr>
+                            <th style="width: 200px;">Nombre:</th>
+                            <td>{{ user.get_full_name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Tipo de Documento:</th>
+                            <td>Cédula de Identidad</td>
+                        </tr>
+                        <tr>
+                            <th>RUT:</th>
+                            <td>{{ user.rut }}</td>
+                        </tr>
+                        <tr>
+                            <th>Número de Documento:</th>
+                            <td>{{ user.numero_documento }}</td>
+                        </tr>
+                        <tr>
+                            <th>Dirección:</th>
+                            <td>{{ user.direccion }}</td>
+                        </tr>
+                        <tr>
+                            <th>Teléfono:</th>
+                            <td>{{ user.telefono }}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-4 text-center">
+                    <h5 class="mb-3">Foto de Perfil</h5>
+                    {% if user.foto_perfil %}
+                        <img src="{{ user.foto_perfil.url }}" alt="Foto de Perfil" class="img-fluid rounded" style="max-height: 200px;">
+                    {% else %}
+                        <div class="alert alert-warning">
+                            <i class="fas fa-user"></i> Sin foto de perfil
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <h5 class="mt-4 mb-3">Documentos Cargados</h5>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="mb-0">Carnet Frontal</h6>
+                        </div>
+                        <div class="card-body">
+                            {% if user.foto_carnet_frente %}
+                                <img src="{{ user.foto_carnet_frente.url }}" alt="Carnet Frontal" class="img-fluid">
+                            {% else %}
+                                <div class="alert alert-warning">
+                                    <i class="fas fa-id-card"></i> Imagen no cargada
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="mb-0">Carnet Posterior</h6>
+                        </div>
+                        <div class="card-body">
+                            {% if user.foto_carnet_dorso %}
+                                <img src="{{ user.foto_carnet_dorso.url }}" alt="Carnet Posterior" class="img-fluid">
+                            {% else %}
+                                <div class="alert alert-warning">
+                                    <i class="fas fa-id-card"></i> Imagen no cargada
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% if user.estado_verificacion == 'verificado' %}
+            <div class="alert alert-success mt-4">
+                <h5 class="alert-heading">¡Verificación Completada!</h5>
+                <p>Tu cuenta ha sido verificada exitosamente el {{ user.fecha_verificacion|date:"d/m/Y H:i" }}</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Font Awesome para los iconos -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+{% endblock %}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background-color: #ffc107;
+            color: #333;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+        }
+        .content {
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Actualización de estado de verificación</h1>
+    </div>
+    
+    <div class="content">
+        <p>Hola {{ user.get_full_name }},</p>
+        
+        <p>Tu cuenta en GoworQ está siendo revisada por nuestro equipo.</p>
+        
+        <p>Notas adicionales: {{ user.notas_verificacion }}</p>
+        
+        <p>Te notificaremos cuando hayamos completado el proceso de verificación.</p>
+        
+        <p>Si tienes alguna consulta, no dudes en contactarnos en soportegoworq@gmail.com.</p>
+        
+        <p>Saludos,<br>
+        El equipo de GoworQ</p>
+    </div>
+    
+    <div class="footer">
+        <p>Este es un correo automático, por favor no responder.</p>
+        <p>&copy; {% now "Y" %} GoworQ. Todos los derechos reservados.</p>
+    </div>
+</body>
+</html>
